@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ final class RootComponent: Component<RootDependency> {
     let rootViewController: RootViewController
 
     init(dependency: RootDependency,
-         rootViewController: RootViewController) {
+         rootViewController: RootViewController)
+    {
         self.rootViewController = rootViewController
         super.init(dependency: dependency)
     }

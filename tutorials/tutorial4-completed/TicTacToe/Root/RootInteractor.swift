@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -77,7 +77,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
         return loggedInActionableItemSubject
             .map { (loggedInItem: LoggedInActionableItem) -> (LoggedInActionableItem, ()) in
                 (loggedInItem, ())
-        }
+            }
     }
 
     // MARK: - Private

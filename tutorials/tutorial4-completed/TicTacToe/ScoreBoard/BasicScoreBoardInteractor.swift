@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -37,7 +37,8 @@ final class BasicScoreBoardInteractor: PresentableInteractor<BasicScoreBoardPres
     weak var listener: BasicScoreBoardListener?
 
     init(presenter: BasicScoreBoardPresentable,
-         scoreStream: ScoreStream) {
+         scoreStream: ScoreStream)
+    {
         self.scoreStream = scoreStream
         super.init(presenter: presenter)
         presenter.listener = self

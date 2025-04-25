@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -97,9 +97,7 @@ open class Worker: Working {
     /// starts. The default implementation does nothing.
     ///
     /// - parameter interactorScope: The interactor scope this `Worker` is bound to.
-    open func didStart(_ interactorScope: InteractorScope) {
-
-    }
+    open func didStart(_ interactorScope: InteractorScope) {}
 
     /// Stops the worker.
     ///

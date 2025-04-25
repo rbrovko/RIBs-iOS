@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ final class LoggedInRouter: Router<LoggedInInteractable>, LoggedInRouting {
 
     init(interactor: LoggedInInteractable,
          viewController: LoggedInViewControllable,
-         offGameBuilder: OffGameBuildable) {
+         offGameBuilder: OffGameBuildable)
+    {
         self.viewController = viewController
         self.offGameBuilder = offGameBuilder
         super.init(interactor: interactor)

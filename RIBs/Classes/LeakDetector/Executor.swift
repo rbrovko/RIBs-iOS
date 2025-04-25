@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class Executor {
     ///   pauses.
     /// - parameter maxFrameDuration: The maximum duration a single frame should take. Defaults to 33ms.
     /// - parameter logic: The closure logic to perform.
-    public static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> Void) {
+    public static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> ()) {
         let period = DispatchTimeInterval.milliseconds(maxFrameDuration / 3)
         var lastRunLoopTime = Date().timeIntervalSinceReferenceDate
         var properFrameTime = 0.0
@@ -46,7 +46,7 @@ public class Executor {
 
                 // If we did drop frame, we under-count the frame duration, which is fine. It
                 // just means the logic is performed slightly later.
-                let boundedElapsedTime = min(trueElapsedTime, Double(maxFrameDuration) / 1_000)
+                let boundedElapsedTime = min(trueElapsedTime, Double(maxFrameDuration) / 1000)
                 properFrameTime += boundedElapsedTime
                 if properFrameTime > delay {
                     didExecute = true

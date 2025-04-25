@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -120,15 +120,15 @@ open class Step<WorkflowActionableItemType, ActionableItemType, ValueType> {
     /// - returns: The next step.
     public final func onStep<NextActionableItemType, NextValueType>(_ onStep: @escaping (ActionableItemType, ValueType) -> Observable<(NextActionableItemType, NextValueType)>) -> Step<WorkflowActionableItemType, NextActionableItemType, NextValueType> {
         let confinedNextStep = observable
-            .flatMapLatest { (actionableItem, value) -> Observable<(Bool, ActionableItemType, ValueType)> in
+            .flatMapLatest { actionableItem, value -> Observable<(Bool, ActionableItemType, ValueType)> in
                 // We cannot use generic constraint here since Swift requires constraints be
                 // satisfied by concrete types, preventing using protocol as actionable type.
                 if let interactor = actionableItem as? Interactable {
                     return interactor
                         .isActiveStream
-                        .map({ (isActive: Bool) -> (Bool, ActionableItemType, ValueType) in
+                        .map { (isActive: Bool) -> (Bool, ActionableItemType, ValueType) in
                             (isActive, actionableItem, value)
-                        })
+                        }
                 } else {
                     return Observable.just((true, actionableItem, value))
                 }
@@ -150,7 +150,7 @@ open class Step<WorkflowActionableItemType, ActionableItemType, ValueType> {
     ///
     /// - parameter onError: The closure to execute when an error occurs.
     /// - returns: This step.
-    public final func onError(_ onError: @escaping ((Error) -> Void)) -> Step<WorkflowActionableItemType, ActionableItemType, ValueType> {
+    public final func onError(_ onError: @escaping ((Error) -> ())) -> Step<WorkflowActionableItemType, ActionableItemType, ValueType> {
         observable = observable.do(onError: onError)
         return self
     }

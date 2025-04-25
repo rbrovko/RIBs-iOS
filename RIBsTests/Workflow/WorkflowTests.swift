@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-import XCTest
-import RxSwift
 @testable import RIBs
+import RxSwift
+import XCTest
 
 final class WorkerflowTests: XCTestCase {
 
@@ -33,34 +33,34 @@ final class WorkerflowTests: XCTestCase {
 
         let workflow = Workflow<String>()
         _ = workflow
-            .onStep { (_) -> Observable<((), ())> in
+            .onStep { _ -> Observable<((), ())> in
                 outerStep1RunCount += 1
 
                 return emptyObservable
             }
-            .onStep { (_, _) -> Observable<((), ())> in
+            .onStep { _, _ -> Observable<((), ())> in
                 outerStep2RunCount += 1
 
                 return emptyObservable
             }
-            .onStep { (_, _) -> Observable<((), ())> in
+            .onStep { _, _ -> Observable<((), ())> in
                 outerStep3RunCount += 1
 
                 let innerStep: Step<String, (), ()>? = emptyObservable.fork(workflow)
 
                 innerStep?
-                    .onStep({ (_, _) -> Observable<((), ())> in
+                    .onStep { _, _ -> Observable<((), ())> in
                         innerStep1RunCount += 1
                         return emptyObservable
-                    })
-                    .onStep({ (_, _) -> Observable<((), ())> in
+                    }
+                    .onStep { _, _ -> Observable<((), ())> in
                         innerStep2RunCount += 1
                         return emptyObservable
-                    })
-                    .onStep({ (_, _) -> Observable<((), ())> in
+                    }
+                    .onStep { _, _ -> Observable<((), ())> in
                         innerStep3RunCount += 1
                         return emptyObservable
-                    })
+                    }
                     .commit()
 
                 return emptyObservable
@@ -164,18 +164,18 @@ final class WorkerflowTests: XCTestCase {
             .onStep { _ -> Observable<((), ())> in
                 rootCallCount += 1
                 return emptyObservable
-        }
+            }
 
         let firstFork: Step<(), (), ()>? = rootStep.asObservable().fork(workflow)
         _ = firstFork?
-            .onStep { (_, _) -> Observable<((), ())> in
+            .onStep { _, _ -> Observable<((), ())> in
                 return Observable.just(((), ()))
             }
             .commit()
 
         let secondFork: Step<(), (), ()>? = rootStep.asObservable().fork(workflow)
         _ = secondFork?
-            .onStep { (_, _) -> Observable<((), ())> in
+            .onStep { _, _ -> Observable<((), ())> in
                 return Observable.just(((), ()))
             }
             .commit()

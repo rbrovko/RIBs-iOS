@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -29,12 +29,14 @@ final class RandomWinViewController: UIViewController, RandomWinPresentable, Ran
     weak var listener: RandomWinPresentableListener?
 
     init(player1Name: String,
-         player2Name: String) {
+         player2Name: String)
+    {
         self.player1Name = player1Name
         self.player2Name = player2Name
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("Method is not supported")
     }

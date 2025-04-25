@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-import RxSwift
 import RxRelay
+import RxSwift
 import UIKit
 
 /// Leak detection status.
@@ -29,7 +29,7 @@ public enum LeakDetectionStatus {
 }
 
 /// The default time values used for leak detection expectations.
-public struct LeakDefaultExpectationTime {
+public enum LeakDefaultExpectationTime {
 
     /// The object deallocation time.
     public static let deallocation = 1.0
@@ -181,9 +181,9 @@ private class LeakDetectionHandleImpl: LeakDetectionHandle {
     }
 
     let cancelledRelay = BehaviorRelay<Bool>(value: false)
-    let cancelClosure: (() -> Void)?
+    let cancelClosure: (() -> ())?
 
-    init(cancelClosure: (() -> Void)? = nil) {
+    init(cancelClosure: (() -> ())? = nil) {
         self.cancelClosure = cancelClosure
     }
 

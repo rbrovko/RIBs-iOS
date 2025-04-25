@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-@testable import TicTacToe
 import RIBs
 import RxSwift
+@testable import TicTacToe
 import UIKit
 
 // MARK: - LoggedInBuildableMock class
@@ -28,8 +28,7 @@ class LoggedInBuildableMock: LoggedInBuildable {
     var buildHandler: ((_ listener: LoggedInListener) -> LoggedInRouting)?
     var buildCallCount: Int = 0
 
-    init() {
-    }
+    init() {}
 
     func build(withListener listener: LoggedInListener) -> LoggedInRouting {
         buildCallCount += 1
@@ -51,7 +50,7 @@ class LoggedInInteractableMock: LoggedInInteractable {
     var listenerSetCallCount = 0
     var isActive: Bool = false { didSet { isActiveSetCallCount += 1 } }
     var isActiveSetCallCount = 0
-    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
+    var isActiveStreamSubject: PublishSubject<Bool> = .init() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
     var isActiveStreamSubjectSetCallCount = 0
     var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
 
@@ -65,8 +64,7 @@ class LoggedInInteractableMock: LoggedInInteractable {
     var gameDidEndHandler: (() -> ())?
     var gameDidEndCallCount: Int = 0
 
-    init() {
-    }
+    init() {}
 
     func activate() {
         activateCallCount += 1
@@ -104,9 +102,9 @@ class LoggedInRoutingMock: LoggedInRouting {
     // Variables
     var interactable: Interactable { didSet { interactableSetCallCount += 1 } }
     var interactableSetCallCount = 0
-    var children: [Routing] = [Routing]() { didSet { childrenSetCallCount += 1 } }
+    var children: [Routing] = .init() { didSet { childrenSetCallCount += 1 } }
     var childrenSetCallCount = 0
-    var lifecycleSubject: PublishSubject<RouterLifecycle> = PublishSubject<RouterLifecycle>() { didSet { lifecycleSubjectSetCallCount += 1 } }
+    var lifecycleSubject: PublishSubject<RouterLifecycle> = .init() { didSet { lifecycleSubjectSetCallCount += 1 } }
     var lifecycleSubjectSetCallCount = 0
     var lifecycle: Observable<RouterLifecycle> { return lifecycleSubject }
 
@@ -180,8 +178,7 @@ class LoggedOutBuildableMock: LoggedOutBuildable {
     var buildHandler: ((_ listener: LoggedOutListener) -> LoggedOutRouting)?
     var buildCallCount: Int = 0
 
-    init() {
-    }
+    init() {}
 
     func build(withListener listener: LoggedOutListener) -> LoggedOutRouting {
         buildCallCount += 1
@@ -203,7 +200,7 @@ class RootInteractableMock: RootInteractable {
     var listenerSetCallCount = 0
     var isActive: Bool = false { didSet { isActiveSetCallCount += 1 } }
     var isActiveSetCallCount = 0
-    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
+    var isActiveStreamSubject: PublishSubject<Bool> = .init() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
     var isActiveStreamSubjectSetCallCount = 0
     var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
 
@@ -215,8 +212,7 @@ class RootInteractableMock: RootInteractable {
     var didLoginHandler: ((_ player1Name: String, _ player2Name: String) -> ())?
     var didLoginCallCount: Int = 0
 
-    init() {
-    }
+    init() {}
 
     func activate() {
         activateCallCount += 1
@@ -245,7 +241,7 @@ class RootInteractableMock: RootInteractable {
 /// A RootViewControllableMock class used for testing.
 class RootViewControllableMock: RootViewControllable {
     // Variables
-    var uiviewController: UIViewController = UIViewController() { didSet { uiviewControllerSetCallCount += 1 } }
+    var uiviewController: UIViewController = .init() { didSet { uiviewControllerSetCallCount += 1 } }
     var uiviewControllerSetCallCount = 0
 
     // Function Handlers
@@ -254,8 +250,7 @@ class RootViewControllableMock: RootViewControllable {
     var dismissHandler: ((_ viewController: ViewControllable) -> ())?
     var dismissCallCount: Int = 0
 
-    init() {
-    }
+    init() {}
 
     func present(viewController: ViewControllable) {
         presentCallCount += 1

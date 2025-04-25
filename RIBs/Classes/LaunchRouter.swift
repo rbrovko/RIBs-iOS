@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ open class LaunchRouter<InteractorType, ViewControllerType>: ViewableRouter<Inte
     ///
     /// - parameter interactor: The corresponding `Interactor` of this `Router`.
     /// - parameter viewController: The corresponding `ViewController` of this `Router`.
-    public override init(interactor: InteractorType, viewController: ViewControllerType) {
+    override public init(interactor: InteractorType, viewController: ViewControllerType) {
         super.init(interactor: interactor, viewController: viewController)
     }
 
@@ -42,7 +42,7 @@ open class LaunchRouter<InteractorType, ViewControllerType>: ViewableRouter<Inte
     public final func launch(from window: UIWindow) {
         interactable.activate()
         load()
-        
+
         window.rootViewController = viewControllable.uiviewController
         window.makeKeyAndVisible()
     }

@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,22 +20,22 @@ import RxSwift
 import UIKit
 
 class WindowMock: UIWindow {
-    
+
     override var isKeyWindow: Bool {
         return internalIsKeyWindow
     }
-    
+
     override var rootViewController: UIViewController? {
         get { return internalRootViewController }
         set { internalRootViewController = newValue }
     }
-    
+
     override func makeKeyAndVisible() {
         internalIsKeyWindow = true
     }
-    
+
     // MARK: - Private
-    
+
     private var internalIsKeyWindow: Bool = false
     private var internalRootViewController: UIViewController?
 }
@@ -72,14 +72,14 @@ class InteractableMock: Interactable {
     // Variables
     var isActive: Bool = false { didSet { isActiveSetCallCount += 1 } }
     var isActiveSetCallCount = 0
-    var isActiveStreamSubject: PublishSubject<Bool> = PublishSubject<Bool>() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
+    var isActiveStreamSubject: PublishSubject<Bool> = .init() { didSet { isActiveStreamSubjectSetCallCount += 1 } }
     var isActiveStreamSubjectSetCallCount = 0
     var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
 
     // Function Handlers
-    var activateHandler: (() -> Void)?
+    var activateHandler: (() -> ())?
     var activateCallCount: Int = 0
-    var deactivateHandler: (() -> Void)?
+    var deactivateHandler: (() -> ())?
     var deactivateCallCount: Int = 0
 
     init() {}

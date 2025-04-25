@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2017. Uber Technologies
+//  Copyright (c) 2025. Uber Technologies
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -145,7 +145,7 @@ final class TicTacToeInteractor: PresentableInteractor<TicTacToePresentable>, Ti
     }
 }
 
-struct GameConstants {
+enum GameConstants {
     static let rowCount = 3
     static let colCount = 3
 }
