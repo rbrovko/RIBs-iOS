@@ -199,7 +199,7 @@ public extension Disposable {
     }
 }
 
-fileprivate class WeakInteractorScope: InteractorScope {
+private class WeakInteractorScope: InteractorScope {
 
     weak var sourceScope: InteractorScope?
 

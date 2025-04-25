@@ -33,7 +33,7 @@ final class WorkerflowTests: XCTestCase {
 
         let workflow = Workflow<String>()
         _ = workflow
-            .onStep { (mock) -> Observable<((), ())> in
+            .onStep { (_) -> Observable<((), ())> in
                 outerStep1RunCount += 1
 
                 return emptyObservable

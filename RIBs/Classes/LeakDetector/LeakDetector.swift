@@ -163,7 +163,7 @@ public class LeakDetector {
     private let trackingObjects = NSMapTable<AnyObject, AnyObject>.strongToWeakObjects()
     private let expectationCount = BehaviorRelay<Int>(value: 0)
 
-    lazy var disableLeakDetector: Bool = {
+    public lazy var disableLeakDetector: Bool = {
         if let environmentValue = ProcessInfo().environment["DISABLE_LEAK_DETECTION"] {
             let lowercase = environmentValue.lowercased()
             return lowercase == "yes" || lowercase == "true"
@@ -174,16 +174,16 @@ public class LeakDetector {
     private init() {}
 }
 
-fileprivate class LeakDetectionHandleImpl: LeakDetectionHandle {
+private class LeakDetectionHandleImpl: LeakDetectionHandle {
 
     var cancelled: Bool {
         return cancelledRelay.value
     }
 
     let cancelledRelay = BehaviorRelay<Bool>(value: false)
-    let cancelClosure: (() -> ())?
+    let cancelClosure: (() -> Void)?
 
-    init(cancelClosure: (() -> ())? = nil) {
+    init(cancelClosure: (() -> Void)? = nil) {
         self.cancelClosure = cancelClosure
     }
 

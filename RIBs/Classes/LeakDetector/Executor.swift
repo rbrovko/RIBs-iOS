@@ -14,8 +14,6 @@
 //  limitations under the License.
 //
 
-import Dispatch
-import Foundation
 import RxSwift
 
 public class Executor {
@@ -31,14 +29,14 @@ public class Executor {
     ///   pauses.
     /// - parameter maxFrameDuration: The maximum duration a single frame should take. Defaults to 33ms.
     /// - parameter logic: The closure logic to perform.
-    public static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> ()) {
+    public static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> Void) {
         let period = DispatchTimeInterval.milliseconds(maxFrameDuration / 3)
         var lastRunLoopTime = Date().timeIntervalSinceReferenceDate
         var properFrameTime = 0.0
         var didExecute = false
         _ = Observable<Int>
             .timer(DispatchTimeInterval.milliseconds(0), period: period, scheduler: MainScheduler.instance)
-            .take(while: {  _ in
+            .take(while: { _ in
                 !didExecute
             })
             .subscribe(onNext: { _ in
@@ -48,7 +46,7 @@ public class Executor {
 
                 // If we did drop frame, we under-count the frame duration, which is fine. It
                 // just means the logic is performed slightly later.
-                let boundedElapsedTime = min(trueElapsedTime, Double(maxFrameDuration) / 1000)
+                let boundedElapsedTime = min(trueElapsedTime, Double(maxFrameDuration) / 1_000)
                 properFrameTime += boundedElapsedTime
                 if properFrameTime > delay {
                     didExecute = true

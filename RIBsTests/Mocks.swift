@@ -77,9 +77,9 @@ class InteractableMock: Interactable {
     var isActiveStream: Observable<Bool> { return isActiveStreamSubject }
 
     // Function Handlers
-    var activateHandler: (() -> ())?
+    var activateHandler: (() -> Void)?
     var activateCallCount: Int = 0
-    var deactivateHandler: (() -> ())?
+    var deactivateHandler: (() -> Void)?
     var deactivateCallCount: Int = 0
 
     init() {}

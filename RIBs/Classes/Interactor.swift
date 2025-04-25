@@ -168,10 +168,10 @@ public extension ObservableType {
             .combineLatest(interactorScope.isActiveStream, self) { isActive, value in
                 (isActive, value)
             }
-            .filter { isActive, value in
+            .filter { isActive, _ in
                 isActive
             }
-            .map { isActive, value in
+            .map { _, value in
                 value
             }
     }

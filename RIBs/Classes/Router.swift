@@ -196,7 +196,7 @@ open class Router<InteractorType>: Routing {
         }
     }
 
-    private func iterateSubtree(_ root: Routing, closure: (_ node: Routing) -> ()) {
+    private func iterateSubtree(_ root: Routing, closure: (_ node: Routing) -> Void) {
         closure(root)
 
         for child in root.children {
