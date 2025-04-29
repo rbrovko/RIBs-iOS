@@ -16,6 +16,7 @@
 
 @testable import RIBs
 import XCTest
+import CwlPreconditionTesting
 
 class MultiStageComponentizedBuilderTests: XCTestCase {
 
@@ -64,13 +65,15 @@ class MultiStageComponentizedBuilderTests: XCTestCase {
 
         _ = sameInstanceBuilder.finalStageBuild(withDynamicDependency: 92393)
 
-        expectAssertionFailure {
+        let finalStageBuildFatalErrorException = catchBadInstruction {
             _ = sameInstanceBuilder.finalStageBuild(withDynamicDependency: 92393)
         }
+        XCTAssertNotNil(finalStageBuildFatalErrorException, "fatalError expected")
 
-        expectAssertionFailure {
+        let componentForCurrentBuildPassAssertionFailureException = catchBadInstruction {
             _ = sameInstanceBuilder.componentForCurrentBuildPass
         }
+        XCTAssertNotNil(componentForCurrentBuildPassAssertionFailureException, "Assertion failure expected")
     }
 }
 
