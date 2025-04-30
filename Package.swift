@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ReactiveX/RxSwift", from: "6.5.0"),
+        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", from: "2.2.2"), // for testTarget only
     ],
     targets: [
         .target(
@@ -20,7 +21,7 @@ let package = Package(
         ),
         .testTarget(
             name: "RIBsTests",
-            dependencies: ["RIBs"],
+            dependencies: ["RIBs", "CwlPreconditionTesting"],
             path: "RIBsTests"
         ),
     ]

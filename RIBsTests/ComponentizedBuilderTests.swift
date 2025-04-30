@@ -16,6 +16,7 @@
 
 @testable import RIBs
 import XCTest
+import CwlPreconditionTesting
 
 class ComponentizedBuilderTests: XCTestCase {
 
@@ -29,10 +30,16 @@ class ComponentizedBuilderTests: XCTestCase {
         }
 
         let _: MockSimpleRouter = sameInstanceBuilder.build(withDynamicBuildDependency: (), dynamicComponentDependency: ())
-
-        expectAssertionFailure {
+        
+        let options = XCTExpectedFailure.Options()
+        options.issueMatcher = { issue in
+            issue.type == .assertionFailure
+        }
+        
+        let assertionFailureException = catchBadInstruction {
             let _: MockSimpleRouter = sameInstanceBuilder.build(withDynamicBuildDependency: (), dynamicComponentDependency: ())
         }
+        XCTAssertNotNil(assertionFailureException, "Builder should not return the same instance for the same component. Assertion failure is triggered.")
     }
 
     func test_componentForCurrentPass_builderReturnsNewInstance_verifyNoAssertion() {
